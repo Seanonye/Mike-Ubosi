@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mike Ubosi & Sons | Genuine Auto Parts Nigeria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --brand-blue: #003366;      /* Deep Mechanic Blue */
+            --brand-orange: #ff6600;    /* Action/Signal Orange */
+            --dark-gray: #222222;
+            --light-gray: #f4f4f4;
+            --white: #ffffff;
+            --border-color: #ddd;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- NAVBAR --- */
+        .top-bar {
+            background-color: var(--dark-gray);
+            color: #ccc;
+            padding: 8px 5%;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .top-bar i { color: var(--brand-orange); margin-right: 5px; }
+
+        .navbar {
+            background: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--brand-blue);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+  height: 50px;
+  width: auto;
+}
+        
+        .logo i { font-size: 1.5rem; color: var(--brand-orange); }
+        .logo span { font-size: 1rem; color: var(--dark-gray); font-weight: 500; display: block; letter-spacing: 0; }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--dark-gray);
+            position: relative;
+        }
+
+        .nav-links a:hover { color: var(--brand-blue); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--brand-orange);
+            transition: 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            padding: 10px 15px;
+            padding-right: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            width: 250px;
+            outline: none;
+        }
+
+        .search-box button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #777;
+            cursor: pointer;
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 1.2rem;
+            color: var(--brand-blue);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--brand-orange);
+            color: var(--white);
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+           background-image: url(images/mike\ ubosi\ logo\ removed.png);
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 100px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 600px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-tag {
+            background-color: var(--brand-orange);
+            color: var(--white);
+            padding: 5px 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .hero-writeup {
+            color: black;
+        }
+
+        
+
+        .hero h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: black;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            background-color: var(--brand-orange);
+            color: var(--white);
+            border: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        
+        .btn:hover { background-color: #e55c00; }
+
+        /* --- PARTS FINDER WIDGET --- */
+        .parts-finder {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            width: 400px;
+            color: var(--dark-gray);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-top: 5px solid var(--brand-blue);
+        }
+
+        .finder-title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group { margin-bottom: 15px; }
+
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: 'Open Sans', sans-serif;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .btn-full { width: 100%; background-color: var(--brand-blue); text-align: center; }
+        .btn-full:hover { background-color: #002244; }
+
+        /* --- FEATURE STRIP (To separate hero/footer) --- */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 40px 5%;
+            background: var(--white);
+            border-bottom: 1px solid #eee;
+        }
+        .feature-box { text-align: center; }
+        .feature-box i { font-size: 2rem; color: var(--brand-blue); margin-bottom: 10px; }
+        .feature-box h4 { font-weight: 700; margin-bottom: 5px; }
+        .feature-box p { font-size: 0.9rem; color: #777; }
+
+        /* --- FOOTER --- */
+        .footer {
+            background-color: #111;
+            color: #aaa;
+            padding: 60px 5% 20px 5%;
+            margin-top: auto; /* Push to bottom if content is short */
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a:hover { color: var(--brand-orange); padding-left: 5px; }
+
+        .contact-info li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            width: 35px;
+            height: 35px;
+            background: #333;
+            color: var(--white);
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .social-icons a:hover { background: var(--brand-orange); }
+
+        .copyright {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 60px; }
+            .hero-content { margin-bottom: 40px; }
+            .parts-finder { width: 100%; }
+            .nav-links, .search-box { display: none; } /* Simplified mobile view */
+            .menu-toggle { display: block; }
+            .top-bar { flex-direction: column; text-align: center; gap: 5px; }
+            .features { flex-direction: column; gap: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div><i class="fas fa-map-marker-alt"></i> Shop 45, Ladipo Auto Market, Mushin, Lagos</div>
+        <div><i class="fas fa-phone-alt"></i> +234 800 UBOSI PARTS</div>
+    </div>
+
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <img src="images/mike ubosi logo removed.png" alt="">
+            <div>
+                Mike Ubosi<br>
+                <span>& SONS LIMITED</span>
+            </div>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="catalogue.html">Shop Parts</a></li>
+            <li><a href="toyota.html">Toyota</a></li>
+            <li><a href="#">Honda</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <div class="search-box">
+                <input type="text" placeholder="Search part number or name...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <a href="#" class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">2</span>
+            </a>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">Best Prices in Ladipo</span>
+            <div class="hero-writeup">
+                 <h1>Genuine Auto Parts for Nigerian Roads</h1>
+            </div>
+           
+            <a href="catalogue.html" class="btn">Shop Catalog <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="parts-finder">
+            <div class="finder-title"><i class="fas fa-car"></i> Find Your Part</div>
+            <form>
+                <div class="form-group">
+                    <select>
+                        <option>Select Year</option>
+                        <option>2020</option>
+                        <option>2015</option>
+                        <option>2010</option>
+                        <option>2005</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select>
+                        <option>Select Make (e.g. Toyota)</option>
+                        <option>Toyota</option>
+                        <option>Honda</option>
+                        <option>Lexus</option>
+                        <option>Mercedes-Benz</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select>
+                        <option>Select Model (e.g. Camry)</option>
+                        <option>Camry</option>
+                        <option>Corolla</option>
+                        <option>Accord</option>
+                        <option>RX 350</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-full">Search Parts</button>
+            </form>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="feature-box">
+            <i class="fas fa-check-circle"></i>
+            <h4>100% Original</h4>
+            <p>Guaranteed OEM parts.</p>
+        </div>
+        <div class="feature-box">
+            <i class="fas fa-truck"></i>
+            <h4>Nationwide Delivery</h4>
+            <p>We waybill to any state.</p>
+        </div>
+        <div class="feature-box">
+            <i class="fas fa-tools"></i>
+            <h4>Mechanic Advice</h4>
+            <p>Free consultation available.</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Mike Ubosi & Sons</h3>
+                <p>Since 1998, we have been the trusted plug for original Tokunbo and New car parts in Lagos. We ensure your car runs smoothly without "stories".</p>
+                <br>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Engine Parts</a></li>
+                    <li><a href="#">Suspension & Shocks</a></li>
+                    <li><a href="#">Brake Pads</a></li>
+                    <li><a href="#">Oil & Filters</a></li>
+                    <li><a href="#">Electricals</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <ul class="contact-info">
+                    <li>
+                        <i class="fas fa-map-marker-alt" style="color: var(--brand-orange); margin-top:5px;"></i>
+                        <span>Shop 45, Zone D,<br>Ladipo Auto Spare Parts Market,<br>Mushin, Lagos.</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone" style="color: var(--brand-orange);"></i>
+                        <span>0801 234 5678</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope" style="color: var(--brand-orange);"></i>
+                        <span>sales@mikeubosi.com</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            &copy; 2025 Mike Ubosi & Sons Ltd. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toyota Genuine Parts | Mike Ubosi & Sons</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CORE VARIABLES --- */
+        :root {
+            --brand-blue: #003366;
+            --brand-orange: #ff6600;
+            --toyota-red: #EB0A1E; /* Specific accent for this page */
+            --dark-gray: #222222;
+            --light-gray: #f4f4f4;
+            --white: #ffffff;
+            --border-color: #ddd;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--brand-blue);
+            text-transform: uppercase;
+        }
+
+        .nav-actions a { margin-left: 20px; font-weight: 600; }
+
+        /* --- TOYOTA HERO BANNER --- */
+        .brand-hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1629897048514-3dd74151e86f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 60px 5%;
+            color: var(--white);
+            text-align: center;
+            border-bottom: 5px solid var(--toyota-red);
+        }
+
+        .brand-hero h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .brand-hero span { color: var(--toyota-red); }
+
+        /* --- MODEL SELECTOR (New Feature) --- */
+        .model-section {
+            padding: 40px 5%;
+            text-align: center;
+            background: var(--white);
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .model-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .model-card {
+            width: 140px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .model-card:hover { transform: translateY(-5px); }
+
+        .model-icon {
+            width: 80px;
+            height: 80px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            margin: 0 auto 10px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #555;
+            border: 2px solid transparent;
+        }
+
+        .model-card:hover .model-icon {
+            border-color: var(--toyota-red);
+            color: var(--toyota-red);
+            background: #fff0f0;
+        }
+
+        .model-name { font-weight: 600; font-size: 0.9rem; }
+
+        /* --- MAIN LAYOUT --- */
+        .container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 40px;
+            padding: 0 5%;
+            margin-bottom: 80px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            height: fit-content;
+        }
+
+        .filter-group { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        .filter-title { font-weight: 700; margin-bottom: 10px; }
+        .filter-list li { margin-bottom: 8px; font-size: 0.9rem; color: #555; }
+        .filter-list input { margin-right: 8px; }
+
+        /* --- PRODUCT GRID --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: var(--toyota-red);
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+        }
+        .badge.tokunbo { background-color: #666; }
+        .badge.genuine { background-color: var(--toyota-red); }
+
+        .product-img {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+            background: #eee;
+        }
+
+        .product-info { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
+        .product-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 5px; }
+        .part-number { font-size: 0.75rem; color: #999; margin-bottom: 10px; font-family: monospace; }
+        .product-price { font-size: 1.1rem; color: var(--brand-blue); font-weight: 800; margin-top: auto; }
+        
+        .btn-add {
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+            background: var(--brand-blue);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-add:hover { background: #002244; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #111;
+            color: #777;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+        }
+
+        /* Add this to your existing CSS */
+.model-card.active .model-icon {
+    background-color: var(--toyota-red);
+    color: var(--white);
+    border-color: var(--toyota-red);
+    box-shadow: 0 5px 15px rgba(235, 10, 30, 0.4);
+}
+
+.model-card.active .model-name {
+    color: var(--toyota-red);
+    font-weight: 700;
+}
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">Mike Ubosi <span style="font-size: 0.8rem; color:#777;">& SONS</span></a>
+        <div class="nav-actions">
+            <a href="index.html">Home</a>
+            <a href="catalogue.html">All Parts</a>
+            <a href="#"><i class="fas fa-shopping-cart"></i> (0)</a>
+        </div>
+    </nav>
+
+    <header class="brand-hero">
+        <h1>Genuine <span>Toyota</span> Parts</h1>
+        <p>Original OEM & Grade A Tokunbo parts for Nigerian Roads.</p>
+    </header>
+
+   <section class="model-section">
+    <h2 class="section-title">Select Your Model</h2>
+    <div class="model-grid">
+        <div class="model-card active" onclick="filterByModel('all', this)">
+            <div class="model-icon"><i class="fas fa-th"></i></div>
+            <div class="model-name">All Models</div>
+        </div>
+        <div class="model-card" onclick="filterByModel('camry', this)">
+            <div class="model-icon"><i class="fas fa-car-side"></i></div>
+            <div class="model-name">Camry</div>
+        </div>
+        <div class="model-card" onclick="filterByModel('corolla', this)">
+            <div class="model-icon"><i class="fas fa-car"></i></div>
+            <div class="model-name">Corolla</div>
+        </div>
+        <div class="model-card" onclick="filterByModel('sienna', this)">
+            <div class="model-icon"><i class="fas fa-shuttle-van"></i></div>
+            <div class="model-name">Sienna</div>
+        </div>
+        <div class="model-card" onclick="filterByModel('hilux', this)">
+            <div class="model-icon"><i class="fas fa-truck-pickup"></i></div>
+            <div class="model-name">Hilux</div>
+        </div>
+    </div>
+</section>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="filter-group">
+                <div class="filter-title">System</div>
+                <ul class="filter-list">
+                    <li><input type="checkbox" checked> Engine & Transmission</li>
+                    <li><input type="checkbox"> Suspension (Legs)</li>
+                    <li><input type="checkbox"> Braking System</li>
+                    <li><input type="checkbox"> Electricals (Brainbox)</li>
+                    <li><input type="checkbox"> Body Parts</li>
+                </ul>
+            </div>
+
+            <div class="filter-group">
+                <div class="filter-title">Year Model</div>
+                <ul class="filter-list">
+                    <li><input type="checkbox"> 2003 - 2006 (Big Daddy)</li>
+                    <li><input type="checkbox"> 2007 - 2011 (Muscle)</li>
+                    <li><input type="checkbox"> 2012 - 2015 (Pencil Light)</li>
+                    <li><input type="checkbox"> 2016 - 2020</li>
+                    <li><input type="checkbox"> 2021+</li>
+                </ul>
+            </div>
+        </aside>
+
+       <main class="product-grid" id="partsContainer">
+
+    <div class="product-card" data-models="camry highlander sienna">
+        <span class="badge tokunbo">Tokunbo</span>
+        <img src="images/toyota complete engine.png" alt="Engine" class="product-img">
+        <div class="product-info">
+            <h3 class="product-title">Toyota 2GR-FE V6 Engine (Complete)</h3>
+            <div class="part-number">PN: 19000-31A10 | Fits: Camry, Highlander, Sienna</div>
+            <div class="product-price">₦950,000</div>
+            <button class="btn-add">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="product-card" data-models="all camry corolla sienna hilux highlander">
+        <span class="badge genuine">New Genuine</span>
+        <img src="images/toyota oil filter.png" alt="Oil Filter" class="product-img">
+        <div class="product-info">
+            <h3 class="product-title">Toyota Genuine Oil Filter (Box of 10)</h3>
+            <div class="part-number">PN: 90915-YZZD4 | Universal Fit</div>
+            <div class="product-price">₦45,000</div>
+            <button class="btn-add">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="product-card" data-models="corolla">
+        <span class="badge tokunbo">Tokunbo</span>
+        <img src="images/headlamp toyota.png" alt="Headlamp" class="product-img">
+        <div class="product-info">
+            <h3 class="product-title">Toyota Corolla 2014 "Bankmore" Headlamp</h3>
+            <div class="part-number">PN: 81110-02E60 | Left Side</div>
+            <div class="product-price">₦65,000</div>
+            <button class="btn-add">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="product-card" data-models="hilux">
+        <span class="badge genuine">New Genuine</span>
+        <img src="images/hilux brakepad.png" alt="Brake Pads" class="product-img">
+        <div class="product-info">
+            <h3 class="product-title">Toyota Hilux Front Brake Pads</h3>
+            <div class="part-number">PN: 04465-0K360 | Heavy Duty</div>
+            <div class="product-price">₦35,000</div>
+            <button class="btn-add">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="product-card" data-models="camry">
+        <span class="badge tokunbo">Tokunbo</span>
+        <img src="images/muscle shock absorber.png" alt="Shock Absorber" class="product-img">
+        <div class="product-info">
+            <h3 class="product-title">Toyota Camry "Muscle" Shock Absorber</h3>
+            <div class="part-number">PN: 48510-80491 | KYB/Toyota</div>
+            <div class="product-price">₦40,000</div>
+            <button class="btn-add">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="product-card" data-models="hilux">
+        <span class="badge genuine">New Genuine</span>
+        <img src="images/prado roof.png" alt="Brake Pads" class="product-img">
+        <div class="product-info">
+            <h3 class="product-title"> Aluminium Flat Roof Rack for Toyota Prado 150 Series 2009 - 2023 </h3>
+            <div class="part-number">PN: 04465-0K360 | Fits Prado 150 Series</div>
+            <div class="product-price">₦115,000</div>
+            <button class="btn-add">Add to Cart</button>
+        </div>
+    </div>
+
+</main>
+    </div>
+
+    <footer>
+        &copy; 2025 Mike Ubosi & Sons. Toyota Specialists.
+    </footer>
+
+<script>
+    function filterByModel(modelName, clickedElement) {
+        // 1. Visual: Update the Active Class on Model Cards
+        const allModelCards = document.querySelectorAll('.model-card');
+        allModelCards.forEach(card => card.classList.remove('active'));
+        clickedElement.classList.add('active');
+
+        // 2. Functional: Filter the Products
+        const allProducts = document.querySelectorAll('.product-card');
+
+        allProducts.forEach(product => {
+            // Get the models this part fits (e.g., "camry highlander")
+            const fitsModels = product.getAttribute('data-models');
+
+            // If "all" is selected, or if the product's list includes the selected car
+            if (modelName === 'all' || fitsModels.includes(modelName)) {
+                product.style.display = 'flex'; // Show it
+                
+                // Add a little animation for smoothness
+                product.style.opacity = '0';
+                setTimeout(() => product.style.opacity = '1', 50);
+            } else {
+                product.style.display = 'none'; // Hide it
+            }
+        });
+    }
+</script>
+</body>
+</html>
