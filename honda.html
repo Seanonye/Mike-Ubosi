@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honda Genuine Parts | Mike Ubosi & Sons</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- VARIABLES --- */
+        :root {
+            --brand-blue: #003366;
+            --brand-orange: #ff6600;
+            --honda-red: #CC0000; /* Darker, Racing Red for Honda */
+            --dark-gray: #222222;
+            --light-gray: #f4f4f4;
+            --white: #ffffff;
+            --border-color: #ddd;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--brand-blue);
+            text-transform: uppercase;
+        }
+
+                 .logo img {
+  height: 50px;
+    width: auto}
+
+        .nav-actions a { margin-left: 20px; font-weight: 600; }
+
+        /* --- HONDA HERO --- */
+        .brand-hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
+                        url('images/honda\ wallpaper.webp');
+            background-size: cover;
+            background-position: center;
+            padding: 70px 5%;
+            color: var(--white);
+            text-align: center;
+            border-bottom: 5px solid var(--honda-red);
+        }
+
+        .brand-hero h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-style: italic; /* Honda logo style */
+        }
+        
+        .brand-hero span { color: var(--honda-red); }
+
+        /* --- MODEL SELECTOR --- */
+        .model-section {
+            padding: 30px 5%;
+            text-align: center;
+            background: var(--white);
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .model-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .model-card {
+            width: 140px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+        }
+
+        .model-card:hover { transform: translateY(-3px); }
+
+        .model-card.active {
+            background-color: #fff0f0;
+            border-color: var(--honda-red);
+        }
+
+        .model-card.active .model-icon { color: var(--honda-red); }
+        .model-card.active .model-name { color: var(--honda-red); font-weight: 700; }
+
+        .model-icon {
+            font-size: 2rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .model-name { font-weight: 600; font-size: 0.9rem; }
+
+        /* --- LAYOUT --- */
+        .container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 40px;
+            padding: 0 5%;
+            margin-bottom: 80px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            height: fit-content;
+        }
+
+        .filter-group { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        .filter-title { font-weight: 700; margin-bottom: 10px; }
+        .filter-list li { margin-bottom: 8px; font-size: 0.9rem; color: #555; }
+        .filter-list input { margin-right: 8px; }
+
+        /* --- PRODUCT GRID --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: var(--honda-red);
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+        }
+        .badge.tokunbo { background-color: #666; }
+        .badge.new { background-color: var(--brand-orange); }
+
+        .product-img {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+            background: #eee;
+        }
+
+        .product-info { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
+        .product-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 5px; }
+        .part-number { font-size: 0.75rem; color: #999; margin-bottom: 10px; font-family: monospace; }
+        .product-price { font-size: 1.1rem; color: var(--brand-blue); font-weight: 800; margin-top: auto; }
+        
+        .btn-add {
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+            background: var(--white);
+            color: var(--honda-red);
+            border: 1px solid var(--honda-red);
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .btn-add:hover { background: var(--honda-red); color: white; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #111;
+            color: #777;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="images/mike ubosi logo removed.png" alt="">
+            Mike Ubosi <span style="font-size: 0.8rem; color:#777;">& SONS</span></a>
+        <div class="nav-actions">
+            <a href="index.html">Home</a>
+            <a href="catalogue.html">All Parts</a>
+            <a href="#"><i class="fas fa-shopping-cart"></i> (0)</a>
+        </div>
+    </nav>
+
+    <header class="brand-hero">
+        <h1>The Power of <span>Dreams</span></h1>
+        <img src="images/honda logo.png" alt="">
+        <p>Expert Honda Specialist in Ladipo Market.</p>
+    </header>
+
+    <section class="model-section">
+        <h2 class="section-title">Shop by Model</h2>
+        <div class="model-grid">
+            <div class="model-card active" onclick="filterByModel('all', this)">
+                <div class="model-icon"><i class="fas fa-th"></i></div>
+                <div class="model-name">All Honda</div>
+            </div>
+            <div class="model-card" onclick="filterByModel('accord', this)">
+                <div class="model-icon"><i class="fas fa-car-side"></i></div>
+                <div class="model-name">Accord</div>
+            </div>
+            <div class="model-card" onclick="filterByModel('civic', this)">
+                <div class="model-icon"><i class="fas fa-car-alt"></i></div>
+                <div class="model-name">Civic</div>
+            </div>
+            <div class="model-card" onclick="filterByModel('crv', this)">
+                <div class="model-icon"><i class="fas fa-truck-monster"></i></div>
+                <div class="model-name">CR-V</div>
+            </div>
+            <div class="model-card" onclick="filterByModel('pilot', this)">
+                <div class="model-icon"><i class="fas fa-shuttle-van"></i></div>
+                <div class="model-name">Pilot</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="filter-group">
+                <div class="filter-title">Known Issues (Hot Items)</div>
+                <ul class="filter-list">
+                    <li><input type="checkbox" checked> Ball Joints & Suspension</li>
+                    <li><input type="checkbox"> Steering Rack</li>
+                    <li><input type="checkbox"> Power Steering Pump</li>
+                    <li><input type="checkbox"> AC Compressor</li>
+                </ul>
+            </div>
+
+            <div class="filter-group">
+                <div class="filter-title">Accord Generations</div>
+                <ul class="filter-list">
+                    <li><input type="checkbox"> 2003 - 2005 (End of Discussion)</li>
+                    <li><input type="checkbox"> 2006 - 2007 (Discussion Continues)</li>
+                    <li><input type="checkbox"> 2008 - 2012 (Evil Spirit)</li>
+                    <li><input type="checkbox"> 2013 - 2017 (Anaconda)</li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="product-grid" id="partsContainer">
+
+            <div class="product-card" data-models="accord civic">
+                <span class="badge new">Brand New</span>
+                <img src="images/Lower Ball Joint (Heavy Duty).png" alt="Ball Joint" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Lower Ball Joint (Heavy Duty)</h3>
+                    <div class="part-number">PN: 51220-SDA-A02 | Fits Accord "EOD" & "Evil Spirit"</div>
+                    <div class="product-price">₦18,000</div>
+                    <button class="btn-add">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-models="civic">
+                <span class="badge tokunbo">Tokunbo</span>
+                <img src="images/Electric Steering Rack (Complete).png" alt="Steering Rack" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Electric Steering Rack (Complete)</h3>
+                    <div class="part-number">Fits Honda Civic 2012 - 2015</div>
+                    <div class="product-price">₦180,000</div>
+                    <button class="btn-add">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-models="crv">
+                <span class="badge tokunbo">Tokunbo</span>
+                <img src="images/Rear Shock Absorber (CR-V).png" alt="Shock" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Rear Shock Absorber (CR-V)</h3>
+                    <div class="part-number">Fits CR-V 2007 - 2011</div>
+                    <div class="product-price">₦35,000</div>
+                    <button class="btn-add">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-models="pilot accord">
+                <span class="badge tokunbo">Tokunbo</span>
+                <img src="images/Honda Pilot V6 Alternator.png" alt="Alternator" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Honda Pilot V6 Alternator</h3>
+                    <div class="part-number">Fits Pilot & Accord V6 engines</div>
+                    <div class="product-price">₦45,000</div>
+                    <button class="btn-add">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-models="accord">
+                <span class="badge tokunbo">Tokunbo</span>
+                <img src="images/Accord Front Grille.png" alt="Grille" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Accord "Evil Spirit" Front Grille (Chrome)</h3>
+                    <div class="part-number">Fits 2008 - 2010 models</div>
+                    <div class="product-price">₦30,000</div>
+                    <button class="btn-add">Add to Cart</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <footer>
+        &copy; 2025 Mike Ubosi & Sons. Honda Specialists.
+    </footer>
+
+    <script>
+        function filterByModel(modelName, clickedElement) {
+            // Update Visuals
+            const allModelCards = document.querySelectorAll('.model-card');
+            allModelCards.forEach(card => card.classList.remove('active'));
+            clickedElement.classList.add('active');
+
+            // Filter Logic
+            const allProducts = document.querySelectorAll('.product-card');
+            allProducts.forEach(product => {
+                const fitsModels = product.getAttribute('data-models');
+                if (modelName === 'all' || fitsModels.includes(modelName)) {
+                    product.style.display = 'flex';
+                    product.style.opacity = '0';
+                    setTimeout(() => product.style.opacity = '1', 50);
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

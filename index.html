@@ -321,16 +321,51 @@
             font-size: 0.9rem;
         }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 900px) {
-            .hero { flex-direction: column; text-align: center; padding-top: 60px; }
-            .hero-content { margin-bottom: 40px; }
-            .parts-finder { width: 100%; }
-            .nav-links, .search-box { display: none; } /* Simplified mobile view */
-            .menu-toggle { display: block; }
-            .top-bar { flex-direction: column; text-align: center; gap: 5px; }
-            .features { flex-direction: column; gap: 30px; }
-        }
+      /* --- RESPONSIVE CSS UPDATE --- */
+@media (max-width: 900px) {
+    /* 1. Stack the layout */
+    .hero { flex-direction: column; text-align: center; padding-top: 60px; }
+    .hero-content { margin-bottom: 40px; }
+    .parts-finder { width: 100%; }
+    .top-bar { flex-direction: column; text-align: center; gap: 5px; }
+    .features { flex-direction: column; gap: 30px; }
+    
+    /* 2. Menu Toggle is visible */
+    .menu-toggle { display: block; color: var(--brand-blue); }
+
+    /* 3. Search Box hidden on small screens to save space (optional) */
+    .search-box { display: none; } 
+
+    /* 4. Mobile Navigation Menu Styles */
+    .nav-links {
+        display: none; /* Hidden by default */
+        position: absolute;
+        top: 100%; /* Sits directly below the navbar */
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        flex-direction: column;
+        padding: 20px 0;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        border-top: 3px solid var(--brand-orange);
+    }
+
+    .nav-links.active {
+        display: flex; /* Shows when JS adds the 'active' class */
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+        margin: 10px 0;
+    }
+    
+    .nav-links a {
+        display: block;
+        padding: 10px;
+        font-size: 1.1rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -353,9 +388,9 @@
             <li><a href="#">Home</a></li>
             <li><a href="catalogue.html">Shop Parts</a></li>
             <li><a href="toyota.html">Toyota</a></li>
-            <li><a href="#">Honda</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="honda.html">Honda</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact</a></li>
         </ul>
 
         <div class="nav-actions">
@@ -450,11 +485,12 @@
             <div class="footer-col">
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
-                    <li><a href="#">Engine Parts</a></li>
-                    <li><a href="#">Suspension & Shocks</a></li>
-                    <li><a href="#">Brake Pads</a></li>
-                    <li><a href="#">Oil & Filters</a></li>
-                    <li><a href="#">Electricals</a></li>
+                  <li><a href="#">Home</a></li>
+            <li><a href="catalogue.html">Shop Parts</a></li>
+            <li><a href="toyota.html">Toyota</a></li>
+            <li><a href="honda.html">Honda</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
 
@@ -481,6 +517,64 @@
             &copy; 2025 Mike Ubosi & Sons Ltd. All Rights Reserved.
         </div>
     </footer>
+
+    <script>
+    // --- 1. Mobile Menu Toggle Functionality ---
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuToggle.addEventListener('click', () => {
+        // Toggles the class 'active' on the nav-links ul
+        navLinks.classList.toggle('active');
+        
+        // Optional: Change icon from Bars to Times (X)
+        const icon = menuToggle.querySelector('i');
+        if (navLinks.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+
+    // --- 2. Search Bar Functionality ---
+    const searchInput = document.querySelector('.search-box input');
+    const searchBtn = document.querySelector('.search-box button');
+
+    function handleSearch() {
+        const query = searchInput.value.trim();
+        
+        if (query) {
+            // Simulate a search redirect
+            // In a real app, this would query a database.
+            // Here, we redirect to the catalogue page.
+            
+            // alert(`Searching for: ${query}`); // Remove this line in production
+            window.location.href = `catalogue.html?search=${encodeURIComponent(query)}`;
+        } else {
+            alert("Please enter a part name or car model to search.");
+        }
+    }
+
+    // Trigger search on Button Click
+    searchBtn.addEventListener('click', handleSearch);
+
+    // Trigger search on "Enter" key press
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    });
+
+    // --- 3. Simple Cart Counter Interaction ---
+    const cartIcon = document.querySelector('.cart-icon');
+    cartIcon.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert("Your cart currently has 2 items. Proceeding to checkout...");
+        // window.location.href = 'cart.html'; // Future link
+    });
+</script>
 
 </body>
 </html>

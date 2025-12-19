@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Mike Ubosi & Sons</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- VARIABLES --- */
+        :root {
+            --brand-blue: #003366;
+            --brand-orange: #ff6600;
+            --dark-gray: #222222;
+            --light-gray: #f4f4f4;
+            --white: #ffffff;
+            --border-color: #ddd;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--brand-blue);
+            text-transform: uppercase;
+        }
+
+                 .logo img {
+  height: 50px;
+    width: auto}
+
+        .nav-actions a { margin-left: 20px; font-weight: 600; }
+
+        /* --- PAGE HEADER --- */
+        .page-header {
+            background-color: var(--brand-blue);
+            color: var(--white);
+            padding: 60px 5%;
+            text-align: center;
+               background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('images/mike\ ubosi\ logo.png');
+            background-size: cover;
+            background-position: center;
+            padding: 60px 5%;
+        }
+
+        .page-header h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .page-header p { opacity: 0.9; font-size: 1.1rem; }
+
+        /* --- CONTACT CONTAINER --- */
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Split layout */
+            gap: 50px;
+        }
+
+        /* --- LEFT COLUMN: INFO --- */
+        .contact-info-box {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: fit-content;
+        }
+
+        .info-item {
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #eef4ff;
+            color: var(--brand-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .info-text h4 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .info-text p { color: #666; font-size: 0.95rem; }
+
+        .business-hours {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+        }
+
+        .business-hours h4 { margin-bottom: 15px; font-family: 'Roboto', sans-serif; }
+        
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* --- RIGHT COLUMN: FORM --- */
+        .contact-form-box {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .form-title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--brand-blue);
+        }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--brand-blue);
+            box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--brand-orange);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 1rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover { background-color: #e55c00; }
+
+        /* --- MAP SECTION --- */
+        .map-container {
+            margin-top: 50px;
+            width: 100%;
+            height: 400px;
+            background-color: #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #111;
+            color: #777;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+            .contact-info-box { margin-bottom: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="images/mike ubosi logo removed.png" alt="">
+            Mike Ubosi <span style="font-size: 0.8rem; color:#777;">& SONS</span></a>
+        <div class="nav-actions">
+            <a href="index.html">Home</a>
+            <a href="catalogue.html">Shop Parts</a>
+            <a href="#" style="color: var(--brand-orange);">Contact</a>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1>Contact Us</h1>
+        <p>Visit our shop in Ladipo or send us a message.</p>
+    </header>
+
+    <div class="container">
+        
+        <div class="contact-info-box">
+            
+            <div class="info-item">
+                <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="info-text">
+                    <h4>Shop Address</h4>
+                    <p>Shop 45, Zone D, Ladipo Auto Spare Parts Market,<br>Mushin, Lagos, Nigeria.</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                <div class="info-text">
+                    <h4>Phone Numbers</h4>
+                    <p>+234 800 123 4567<br>+234 801 987 6543 (WhatsApp)</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                <div class="info-text">
+                    <h4>Email Address</h4>
+                    <p>sales@mikeubosi.com<br>support@mikeubosi.com</p>
+                </div>
+            </div>
+
+            <div class="business-hours">
+                <h4><i class="far fa-clock"></i> Business Hours</h4>
+                <div class="hours-row"><span>Monday - Friday</span> <span>8:00 AM - 6:00 PM</span></div>
+                <div class="hours-row"><span>Saturday</span> <span>8:00 AM - 4:00 PM</span></div>
+                <div class="hours-row"><span style="color: var(--brand-orange);">Sunday</span> <span>Closed</span></div>
+            </div>
+
+        </div>
+
+        <div class="contact-form-box">
+            <h3 class="form-title">Send a Message</h3>
+            <form onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" class="form-control" placeholder="e.g. Emeka Okafor" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" class="form-control" placeholder="e.g. 080..." required>
+                </div>
+
+                <div class="form-group">
+                    <label>Car Model (Optional)</label>
+                    <input type="text" class="form-control" placeholder="e.g. Toyota Camry 2010">
+                </div>
+
+                <div class="form-group">
+                    <label>Message / Part Inquiry</label>
+                    <textarea class="form-control" rows="5" placeholder="I am looking for a tokunbo gearbox..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Send Message</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div style="padding: 0 5%; max-width: 1200px; margin: 0 auto;">
+        <h3 style="margin-bottom: 20px; font-family: 'Roboto', sans-serif;">Find Us on the Map</h3>
+        <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.952912260219!2d3.348889314770757!3d6.52763899527876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8c26c11b15c1%3A0xc39281515233150!2sLadipo%20Auto%20Spare%20Parts%20Market!5e0!3m2!1sen!2sng!4v1680000000000!5m2!1sen!2sng" 
+                width="100%" 
+                height="400" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Mike Ubosi & Sons. Ladipo Market, Lagos.
+    </footer>
+
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = document.querySelector('.btn-submit');
+            const originalText = btn.innerText;
+            
+            btn.innerText = "Sending...";
+            btn.style.backgroundColor = "#555";
+            
+            setTimeout(() => {
+                alert("Message Sent! We will contact you shortly via WhatsApp or Phone call.");
+                btn.innerText = originalText;
+                btn.style.backgroundColor = "";
+                e.target.reset();
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

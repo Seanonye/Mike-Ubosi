@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | Mike Ubosi & Sons</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- VARIABLES --- */
+        :root {
+            --brand-blue: #003366;
+            --brand-orange: #ff6600;
+            --dark-gray: #222222;
+            --light-gray: #f4f4f4;
+            --white: #ffffff;
+            --text-gray: #666;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--brand-blue);
+            text-transform: uppercase;
+        }
+
+                 .logo img {
+  height: 50px;
+    width: auto}
+
+        .nav-actions a { margin-left: 20px; font-weight: 600; }
+
+        /* --- HEADER --- */
+        .services-header {
+            background: linear-gradient(rgba(0, 51, 102, 0.9), rgba(0, 51, 102, 0.8)), 
+                        url('https://images.unsplash.com/photo-1487754180451-c456f719a1fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 5%;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .services-header h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .services-header p {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* --- SERVICES GRID --- */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            border-bottom: 4px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-bottom-color: var(--brand-orange);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .icon-box {
+            width: 80px;
+            height: 80px;
+            background: #eef4ff;
+            border-radius: 50%;
+            margin: 0 auto 25px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brand-blue);
+            font-size: 2rem;
+            transition: 0.3s;
+        }
+
+        .service-card:hover .icon-box {
+            background: var(--brand-blue);
+            color: var(--white);
+        }
+
+        .service-card h3 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .service-card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .service-list {
+            text-align: left;
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .service-list li {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #555;
+            display: flex;
+            align-items: center;
+        }
+
+        .service-list li i {
+            color: var(--brand-orange);
+            margin-right: 10px;
+            font-size: 0.8rem;
+        }
+
+        /* --- CALL TO ACTION / BOOKING --- */
+        .cta-section {
+            background-color: var(--brand-blue);
+            color: var(--white);
+            padding: 60px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto 60px auto;
+            border-radius: 8px;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .cta-text h2 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .btn-white {
+            background: var(--white);
+            color: var(--brand-blue);
+            padding: 15px 35px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .btn-white:hover { background: #eee; }
+
+        /* --- HOW IT WORKS (Timeline) --- */
+        .process-section {
+            text-align: center;
+            padding: 0 5% 80px 5%;
+        }
+
+        .section-title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: var(--brand-blue);
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .step-number {
+            font-size: 4rem;
+            font-weight: 900;
+            color: rgba(0,0,0,0.05);
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+        }
+
+        .step h4 { font-size: 1.2rem; margin-bottom: 10px; }
+        .step p { font-size: 0.9rem; color: #666; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #111;
+            color: #777;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .cta-section { flex-direction: column; text-align: center; }
+            .timeline { flex-direction: column; gap: 50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="images/mike ubosi logo removed.png" alt="">
+            Mike Ubosi <span style="font-size: 0.8rem; color:#777;">& SONS</span></a>
+        <div class="nav-actions">
+            <a href="index.html">Home</a>
+            <a href="catalogue.html">Shop Parts</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <header class="services-header">
+        <h1>More Than Just Spare Parts</h1>
+        <p>We provide comprehensive automotive solutions. From procurement to installation and diagnostics, we are your partners in vehicle maintenance.</p>
+    </header>
+
+    <div class="container">
+        
+        <div class="service-card">
+            <div class="icon-box"><i class="fas fa-search-plus"></i></div>
+            <h3>Computer Diagnostics</h3>
+            <p>Don't just guess what's wrong. We use advanced OBD-II scanners to pinpoint the exact fault in your Toyota or Honda.</p>
+            <ul class="service-list">
+                <li><i class="fas fa-check"></i> Check Engine Light Scans</li>
+                <li><i class="fas fa-check"></i> ABS & Airbag Reset</li>
+                <li><i class="fas fa-check"></i> Electrical System Check</li>
+            </ul>
+        </div>
+
+        <div class="service-card">
+            <div class="icon-box"><i class="fas fa-tools"></i></div>
+            <h3>Installation & Repairs</h3>
+            <p>Bought a part from us? We have a team of trusted mechanics in Ladipo who can install it for you immediately.</p>
+            <ul class="service-list">
+                <li><i class="fas fa-check"></i> Engine Swaps (Tokunbo)</li>
+                <li><i class="fas fa-check"></i> Shock Absorber Replacement</li>
+                <li><i class="fas fa-check"></i> Brake Pad Fixing</li>
+            </ul>
+        </div>
+
+        <div class="service-card">
+            <div class="icon-box"><i class="fas fa-truck-moving"></i></div>
+            <h3>Nationwide Waybill</h3>
+            <p>You don't have to be in Lagos to buy genuine parts. We send items daily via major parks and logistics companies.</p>
+            <ul class="service-list">
+                <li><i class="fas fa-check"></i> GIG Logistics</li>
+                <li><i class="fas fa-check"></i> Peace Mass Transit</li>
+                <li><i class="fas fa-check"></i> ABC Transport</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <section class="cta-section">
+        <div class="cta-text">
+            <h2>Need a Mechanic's Opinion?</h2>
+            <p>Not sure if it's your Shocks or Linkage? Speak to our Chief Mechanic before you buy.</p>
+        </div>
+        <a href="https://wa.me/1234567890" class="btn-white"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+    </section>
+
+    <section class="process-section">
+        <h2 class="section-title">How The Waybill Works</h2>
+        <div class="timeline">
+            
+            <div class="step">
+                <div class="step-number">01</div>
+                <h4>Confirm Your Order</h4>
+                <p>Select your parts and send payment via bank transfer. We verify stock immediately.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">02</div>
+                <h4>We Pack & Send</h4>
+                <p>We package your item securely and take it to the transport park (Jibowu/Maza Maza).</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">03</div>
+                <h4>Receive Waybill No.</h4>
+                <p>We send you a picture of the driver's number and the waybill receipt on WhatsApp.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 Mike Ubosi & Sons. Ladipo Market, Lagos.
+    </footer>
+
+</body>
+</html>
