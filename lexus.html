@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexus Genuine Parts | Mike Ubosi & Sons</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- VARIABLES (Luxury Theme) --- */
+        :root {
+            --brand-blue: #003366;
+            --brand-orange: #ff6600;
+            --lexus-platinum: #a0a0a0; /* Luxury Platinum/Silver */
+            --lexus-dark: #1a1a1a;     /* Deep Black for contrast */
+            --dark-gray: #222222;
+            --light-gray: #f9f9f9;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--brand-blue);
+            text-transform: uppercase;
+        }
+
+    .lexus{
+  height: 50px;
+    width: auto
+    }
+
+        .nav-actions a { margin-left: 20px; font-weight: 600; }
+
+        /* --- LEXUS HERO --- */
+        .brand-hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('images/lexus\ rx\ 350.png');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 5%;
+            color: var(--white);
+            text-align: center;
+            border-bottom: 5px solid var(--lexus-platinum);
+        }
+
+        .brand-hero h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .brand-hero span { color: var(--lexus-platinum); }
+        .brand-hero p { font-size: 1.1rem; opacity: 0.9; font-weight: 300; }
+
+        /* --- MODEL SELECTOR --- */
+        .model-section {
+            padding: 30px 5%;
+            text-align: center;
+            background: var(--white);
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--lexus-dark);
+            font-weight: 700;
+        }
+
+        .model-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .model-card {
+            width: 150px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #eee;
+            background: #fff;
+        }
+
+        .model-card:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--lexus-platinum);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .model-card.active {
+            background-color: var(--lexus-dark);
+            color: var(--white);
+            border-color: var(--lexus-dark);
+        }
+
+        .model-card.active .model-icon { color: var(--lexus-platinum); }
+
+        .model-icon {
+            font-size: 2rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .model-name { font-weight: 600; font-size: 0.9rem; }
+
+        /* --- LAYOUT --- */
+        .container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 40px;
+            padding: 0 5%;
+            margin-bottom: 80px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 4px;
+            height: fit-content;
+            border: 1px solid #eee;
+        }
+
+        .filter-group { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        .filter-title { font-weight: 700; margin-bottom: 12px; color: var(--lexus-dark); }
+        .filter-list li { margin-bottom: 10px; font-size: 0.9rem; color: #555; }
+        .filter-list input { margin-right: 8px; accent-color: var(--brand-blue); }
+
+        /* --- PRODUCT GRID --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border: 1px solid #eee;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: var(--lexus-platinum);
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 5px 12px;
+            border-radius: 2px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge.tokunbo { background-color: #555; }
+        .badge.upgrade { background-color: var(--brand-blue); } /* Special badge for upgrades */
+
+        .product-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            background: #eee;
+        }
+
+        .product-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .product-title { font-weight: 700; font-size: 1rem; margin-bottom: 5px; color: var(--lexus-dark); }
+        .part-details { font-size: 0.8rem; color: #777; margin-bottom: 15px; line-height: 1.4; }
+        .product-price { font-size: 1.2rem; color: var(--brand-blue); font-weight: 800; margin-top: auto; }
+        
+        .btn-add {
+            margin-top: 15px;
+            width: 100%;
+            padding: 12px;
+            background: var(--lexus-dark);
+            color: var(--white);
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .btn-add:hover { background: var(--brand-blue); }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #111;
+            color: #777;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">Mike Ubosi <span style="font-size: 0.8rem; color:#777;">& SONS</span></a>
+        <div class="nav-actions">
+            <a href="index.html">Home</a>
+            <a href="catalogue.html">All Parts</a>
+            <a href="#"><i class="fas fa-shopping-cart"></i> (0)</a>
+        </div>
+    </nav>
+
+    <header class="brand-hero">
+        <h1>Experience <span>Amazing</span></h1>
+          <img class="lexus" src="images/lexus logo.png" alt="">
+        <p>Premium OEM Parts & Upgrades for your Lexus.</p>
+    </header>
+
+    <section class="model-section">
+        <h2 class="section-title">Select Series</h2>
+        <div class="model-grid">
+            <div class="model-card active" onclick="filterByModel('all', this)">
+                <div class="model-icon"><i class="fas fa-th-large"></i></div>
+                <div class="model-name">All Models</div>
+            </div>
+            <div class="model-card" onclick="filterByModel('rx', this)">
+                <div class="model-icon"><i class="fas fa-car-side"></i></div>
+                <div class="model-name">RX Series</div>
+            </div>
+            <div class="model-card" onclick="filterByModel('es', this)">
+                <div class="model-icon"><i class="fas fa-car"></i></div>
+                <div class="model-name">ES Series</div>
+            </div>
+            <div class="model-card" onclick="filterByModel('gx', this)">
+                <div class="model-icon"><i class="fas fa-truck-monster"></i></div>
+                <div class="model-name">GX Series</div>
+            </div>
+            <div class="model-card" onclick="filterByModel('lx', this)">
+                <div class="model-icon"><i class="fas fa-shuttle-van"></i></div>
+                <div class="model-name">LX Series</div>
+            </div>
+            <div class="model-card" onclick="filterByModel('is', this)">
+                <div class="model-icon"><i class="fas fa-bolt"></i></div>
+                <div class="model-name">IS Series</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="filter-group">
+                <div class="filter-title">Popular Upgrades</div>
+                <ul class="filter-list">
+                    <li><input type="checkbox" checked> Facelift Conversions</li>
+                    <li><input type="checkbox"> Headlight Upgrades</li>
+                    <li><input type="checkbox"> Android Screens</li>
+                    <li><input type="checkbox"> Suspension Conversion</li>
+                </ul>
+            </div>
+
+            <div class="filter-group">
+                <div class="filter-title">RX Generations</div>
+                <ul class="filter-list">
+                    <li><input type="checkbox"> RX300 (1999-2003)</li>
+                    <li><input type="checkbox"> RX330/350 (2004-2009)</li>
+                    <li><input type="checkbox"> RX350 (2010-2015)</li>
+                    <li><input type="checkbox"> RX350 (2016+)</li>
+                </ul>
+            </div>
+
+            <div class="filter-group">
+                <div class="filter-title">Part Category</div>
+                <ul class="filter-list">
+                    <li><input type="checkbox"> Engine & Gearbox</li>
+                    <li><input type="checkbox"> Body (Bumper/Grille)</li>
+                    <li><input type="checkbox"> Shock Absorbers</li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="product-grid" id="partsContainer">
+
+            <div class="product-card" data-models="rx">
+                <span class="badge upgrade">Upgrade Kit</span>
+                <img src="images/lexus rx facelift kit.webp" alt="RX Facelift" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">RX350 2010 to 2020 Facelift Kit</h3>
+                    <div class="part-details">Includes: Spindle Grille, LED Headlamps, Front Bumper. Transform your old RX to the new look.</div>
+                    <div class="product-price">₦450,000</div>
+                    <button class="btn-add">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-models="gx">
+                <span class="badge upgrade">Conversion Kit</span>
+                <img src="images/gx 470 suspension kit.png" alt="Suspension" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">GX470 Air-to-Coil Suspension Kit</h3>
+                    <div class="part-details">Complete kit to remove problematic air balloons. Includes heavy-duty coil springs and shocks.</div>
+                    <div class="product-price">₦180,000</div>
+                    <button class="btn-add">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-models="es">
+                <span class="badge tokunbo">Tokunbo Grade A</span>
+                <img src="images/lexus transmission.png" alt="Gearbox" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Lexus ES350 Transmission (Gearbox)</h3>
+                    <div class="part-details">Direct Tokunbo standard. Fits 2007-2012 models. Tested and guaranteed.</div>
+                    <div class="product-price">₦420,000</div>
+                    <button class="btn-add">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-models="lx">
+                <span class="badge tokunbo">Tokunbo</span>
+                <img src="images/lx 570 headlamp.webp" alt="Headlamp" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">LX570 2014 LED Headlamp (Right)</h3>
+                    <div class="part-details">Original Stanley. Clean lens, no cracks. Complete with brain box.</div>
+                    <div class="product-price">₦250,000</div>
+                    <button class="btn-add">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-models="is">
+                <span class="badge tokunbo">Tokunbo</span>
+                <img src="images/is250 electric steering rack.png" alt="Steering Rack" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Lexus IS250 Electric Steering Rack</h3>
+                    <div class="part-details">Fits 2006-2013 IS250/350. Solves stiff steering issues.</div>
+                    <div class="product-price">₦140,000</div>
+                    <button class="btn-add">Add to Cart</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <footer>
+        &copy; 2025 Mike Ubosi & Sons. Lexus & Luxury Specialists.
+    </footer>
+
+    <script>
+        function filterByModel(modelName, clickedElement) {
+            // Update Active State
+            const allModelCards = document.querySelectorAll('.model-card');
+            allModelCards.forEach(card => card.classList.remove('active'));
+            clickedElement.classList.add('active');
+
+            // Filter Products
+            const allProducts = document.querySelectorAll('.product-card');
+            allProducts.forEach(product => {
+                const fitsModels = product.getAttribute('data-models');
+                if (modelName === 'all' || fitsModels.includes(modelName)) {
+                    product.style.display = 'flex';
+                    // Reset Animation
+                    product.style.opacity = '0';
+                    setTimeout(() => product.style.opacity = '1', 50);
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

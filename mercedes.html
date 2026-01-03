@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercedes-Benz Parts | Mike Ubosi & Sons</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- VARIABLES (Premium Theme) --- */
+        :root {
+            --brand-blue: #003366;
+            --brand-orange: #ff6600;
+            --benz-silver: #C0C0C0;   /* Mercedes Silver */
+            --benz-black: #111111;    /* Deep Black */
+            --dark-gray: #222222;
+            --light-gray: #f4f4f4;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--brand-blue);
+            text-transform: uppercase;
+        }
+
+        .nav-actions a { margin-left: 20px; font-weight: 600; }
+
+        /* --- MERCEDES HERO --- */
+        .brand-hero {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 90px 5%;
+            color: var(--white);
+            text-align: center;
+            border-bottom: 4px solid var(--benz-silver);
+        }
+
+        .brand-hero h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            font-weight: 300; /* Sleek font weight for luxury */
+            letter-spacing: 1px;
+        }
+        
+        .brand-hero span { font-weight: 900; color: var(--benz-silver); }
+        .brand-hero p { font-size: 1.1rem; opacity: 0.8; font-style: italic; }
+
+        /* --- MODEL SELECTOR --- */
+        .model-section {
+            padding: 40px 5%;
+            text-align: center;
+            background: var(--benz-black);
+            color: var(--white);
+            margin-bottom: 40px;
+        }
+
+        .benz{
+    height: 80px;
+    width: auto
+        }
+
+        .section-title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--benz-silver);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .model-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .model-card {
+            width: 140px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            padding: 15px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            background: #1a1a1a;
+        }
+
+        .model-card:hover { 
+            background: #333; 
+            border-color: var(--benz-silver);
+            transform: translateY(-5px);
+        }
+
+        .model-card.active {
+            background-color: var(--benz-silver);
+            color: var(--benz-black);
+            border-color: var(--white);
+        }
+
+        .model-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #777;
+        }
+        
+        .model-card.active .model-icon { color: var(--benz-black); }
+        .model-card:hover .model-icon { color: var(--white); }
+
+        .model-name { font-weight: 600; font-size: 0.9rem; }
+
+        /* --- LAYOUT --- */
+        .container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 40px;
+            padding: 0 5%;
+            margin-bottom: 80px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 4px;
+            height: fit-content;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .filter-group { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        .filter-title { font-weight: 700; margin-bottom: 15px; font-family: 'Roboto', sans-serif; }
+        .filter-list li { margin-bottom: 10px; font-size: 0.9rem; color: #555; }
+        .filter-list input { margin-right: 10px; accent-color: var(--benz-black); }
+
+        /* --- PRODUCT GRID --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border: 1px solid #eee;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            border-color: var(--benz-black);
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 5px 12px;
+            border-radius: 0; /* Square edges for German feel */
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge.tokunbo { background-color: #555; }
+        .badge.german { background-color: var(--benz-black); border: 1px solid var(--benz-silver); }
+
+        .product-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            background: #eee;
+        }
+
+        .product-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .product-title { font-weight: 700; font-size: 1rem; margin-bottom: 5px; color: var(--benz-black); }
+        .chassis-code { 
+            font-size: 0.75rem; 
+            background: #eee; 
+            color: #333; 
+            padding: 2px 6px; 
+            border-radius: 3px; 
+            display: inline-block;
+            margin-bottom: 10px;
+            width: fit-content;
+        }
+        .product-price { font-size: 1.2rem; color: var(--brand-blue); font-weight: 800; margin-top: auto; }
+        
+        .btn-add {
+            margin-top: 15px;
+            width: 100%;
+            padding: 12px;
+            background: var(--benz-black);
+            color: var(--white);
+            border: 1px solid var(--benz-black);
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .btn-add:hover { background: var(--white); color: var(--benz-black); }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #111;
+            color: #777;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+            .brand-hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">Mike Ubosi <span style="font-size: 0.8rem; color:#777;">& SONS</span></a>
+        <div class="nav-actions">
+            <a href="index.html">Home</a>
+            <a href="catalogue.html">All Parts</a>
+            <a href="#"><i class="fas fa-shopping-cart"></i> (0)</a>
+        </div>
+    </nav>
+
+    <header class="brand-hero">
+        <h1>The Best or <span>Nothing</span></h1>
+        <img src="images/benz logo.png" alt="" class="benz">
+        <p>Premium German Parts for the Nigerian Road.</p>
+    </header>
+
+    <section class="model-section">
+        <h2 class="section-title">Select Class</h2>
+        <div class="model-grid">
+            <div class="model-card active" onclick="filterByModel('all', this)">
+                <div class="model-icon"><i class="fas fa-star"></i></div>
+                <div class="model-name">All Classes</div>
+            </div>
+            <div class="model-card" onclick="filterByModel('c-class', this)">
+                <div class="model-icon"><i class="fas fa-car-side"></i></div>
+                <div class="model-name">C-Class</div>
+            </div>
+            <div class="model-card" onclick="filterByModel('e-class', this)">
+                <div class="model-icon"><i class="fas fa-car"></i></div>
+                <div class="model-name">E-Class</div>
+            </div>
+            <div class="model-card" onclick="filterByModel('glk', this)">
+                <div class="model-icon"><i class="fas fa-truck-pickup"></i></div>
+                <div class="model-name">GLK / GLC</div>
+            </div>
+            <div class="model-card" onclick="filterByModel('m-class', this)">
+                <div class="model-icon"><i class="fas fa-truck-monster"></i></div>
+                <div class="model-name">ML / GLE</div>
+            </div>
+            <div class="model-card" onclick="filterByModel('g-class', this)">
+                <div class="model-icon"><i class="fas fa-square"></i></div>
+                <div class="model-name">G-Wagon</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="filter-group">
+                <div class="filter-title">Popular Chassis</div>
+                <ul class="filter-list">
+                    <li><input type="checkbox"> W204 (C-Class 08-14)</li>
+                    <li><input type="checkbox"> W205 (C-Class 15-21)</li>
+                    <li><input type="checkbox"> W212 (E-Class 10-16)</li>
+                    <li><input type="checkbox"> X204 (GLK Class)</li>
+                    <li><input type="checkbox"> W463 (G-Class)</li>
+                </ul>
+            </div>
+
+            <div class="filter-group">
+                <div class="filter-title">Maintenance</div>
+                <ul class="filter-list">
+                    <li><input type="checkbox" checked> AirMatic Suspension</li>
+                    <li><input type="checkbox"> Brake Pads & Discs</li>
+                    <li><input type="checkbox"> Engine Mounts</li>
+                    <li><input type="checkbox"> Oil Filters (Mann/Mahle)</li>
+                </ul>
+            </div>
+            
+            <div class="filter-group">
+                <div class="filter-title">Upgrades</div>
+                <ul class="filter-list">
+                    <li><input type="checkbox"> G63 Body Kits</li>
+                    <li><input type="checkbox"> AMG Rims</li>
+                    <li><input type="checkbox"> Android Screens</li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="product-grid" id="partsContainer">
+
+            <div class="product-card" data-models="c-class">
+                <span class="badge german">New German</span>
+                <img src="images/benz shock absorber.png" alt="Shock Absorber" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Bilstein Front Shock Absorber</h3>
+                    <div class="chassis-code">W204 | C300/C350</div>
+                    <div class="product-price">₦85,000</div>
+                    <button class="btn-add">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-models="g-class">
+                <span class="badge german">Upgrade Kit</span>
+                <img src="images/g63 facelift.webp" alt="G-Wagon" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">G63 AMG 2020 Facelift Conversion Kit</h3>
+                    <div class="chassis-code">W463 | 2008-2017</div>
+                    <div class="part-details" style="font-size:0.8rem; margin-bottom:10px;">Includes Bumper, Panamericana Grille, Headlamps, Fender Arches.</div>
+                    <div class="product-price">₦1,200,000</div>
+                    <button class="btn-add">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-models="glk c-class e-class">
+                <span class="badge tokunbo">Tokunbo Engine</span>
+                <img src="images/mercedes complete engine.png" alt="Engine" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Mercedes M272 V6 Engine (Complete)</h3>
+                    <div class="chassis-code">GLK350 | C300 | E350</div>
+                    <div class="product-price">₦1,100,000</div>
+                    <button class="btn-add">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-models="m-class">
+                <span class="badge german">New OEM</span>
+                <img src="images/mercedes suspension.png" alt="Suspension" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Rear AirMatic Suspension Bag</h3>
+                    <div class="chassis-code">W164 | ML350/GL450</div>
+                    <div class="product-price">₦75,000</div>
+                    <button class="btn-add">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-models="e-class">
+                <span class="badge german">Ceramic</span>
+                <img src="images/mercedes textar brake pads.png" alt="Brake Pads" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Textar Front Brake Pads</h3>
+                    <div class="chassis-code">W212 | E350/E550</div>
+                    <div class="product-price">₦45,000</div>
+                    <button class="btn-add">Add to Cart</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <footer>
+        &copy; 2025 Mike Ubosi & Sons. Ladipo Market, Lagos.
+    </footer>
+
+    <script>
+        function filterByModel(modelName, clickedElement) {
+            // Update Active State
+            const allModelCards = document.querySelectorAll('.model-card');
+            allModelCards.forEach(card => card.classList.remove('active'));
+            clickedElement.classList.add('active');
+
+            // Filter Logic
+            const allProducts = document.querySelectorAll('.product-card');
+            allProducts.forEach(product => {
+                const fitsModels = product.getAttribute('data-models');
+                if (modelName === 'all' || fitsModels.includes(modelName)) {
+                    product.style.display = 'flex';
+                    product.style.opacity = '0';
+                    setTimeout(() => product.style.opacity = '1', 50);
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
